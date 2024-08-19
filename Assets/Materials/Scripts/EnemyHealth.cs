@@ -8,22 +8,22 @@ public class EnemyHealth : MonoBehaviour
     public int currentHealth;
     public int healAmount = 10;
     public float healInterval = 5f;
-    public Text healthText; // Reference to the UI Text component for health display
+    public Text healthText;
 
-    public ChestInteraction chestInteraction; // Reference to the ChestInteraction script
+    public ChestInteraction chestInteraction; 
 
     private Coroutine healCoroutine;
 
     void Start()
     {
         currentHealth = maxHealth;
-        UpdateHealthDisplay(); // Initialize health display at the start
+        UpdateHealthDisplay(); 
     }
 
     public void TakeDamage(int damageAmount)
     {
         currentHealth -= damageAmount;
-        UpdateHealthDisplay(); // Update health display when taking damage
+        UpdateHealthDisplay();
 
         if (currentHealth <= 0)
         {
@@ -47,13 +47,12 @@ public class EnemyHealth : MonoBehaviour
             healthText.text = "Vida: 0/100";
         }
 
-        // Set the boolean in the ChestInteraction script
         if (chestInteraction != null)
         {
             chestInteraction.enemyDefeated = true;
         }
 
-        Destroy(gameObject); // Destroy the enemy GameObject
+        Destroy(gameObject);
     }
 
     IEnumerator HealOverTime()
@@ -69,10 +68,10 @@ public class EnemyHealth : MonoBehaviour
             }
 
             Debug.Log("Enemy healed. Current health: " + currentHealth);
-            UpdateHealthDisplay(); // Update health display during healing
+            UpdateHealthDisplay();
         }
 
-        healCoroutine = null;  // Reset coroutine reference when healing is done
+        healCoroutine = null;  
     }
 
     void UpdateHealthDisplay()

@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class NavmeshEnemyDetection : MonoBehaviour
 {
-    public bool playerInArea = false;  // Flag to indicate if the player is in the area
-    public GameObject healthPanel;     // Reference to the UI panel displaying enemy health
+    public bool playerInArea = false;  
+    public GameObject healthPanel;  
 
     void Start()
     {
         if (healthPanel != null)
         {
-            healthPanel.SetActive(false); // Initially hide the panel
+            healthPanel.SetActive(false); 
         }
         else
         {
@@ -21,10 +21,10 @@ public class NavmeshEnemyDetection : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            playerInArea = true;  // Player has entered the area
+            playerInArea = true; 
             if (healthPanel != null)
             {
-                healthPanel.SetActive(true); // Show the panel when player is in the area
+                healthPanel.SetActive(true); 
             }
         }
     }
@@ -33,10 +33,10 @@ public class NavmeshEnemyDetection : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            playerInArea = false;  // Player has left the area
+            playerInArea = false; 
             if (healthPanel != null)
             {
-                healthPanel.SetActive(false); // Hide the panel when player is not in the area
+                healthPanel.SetActive(false); 
             }
         }
     }

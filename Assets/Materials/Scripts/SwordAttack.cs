@@ -2,19 +2,18 @@ using UnityEngine;
 
 public class SwordAttack : MonoBehaviour
 {
-    public InventoryManager inventoryManager; // Reference to the InventoryManager
+    public InventoryManager inventoryManager; 
     private GameObject equippedSword;
     private Animator swordAnimator;
     private string swingTriggerName = "Swing";
-    private bool isInteracting = false; // Flag to check if interacting with an object
-    private string swordName; // Name of the equipped sword
-    private bool isSwinging = false; // Flag to check if the sword is currently swinging
-    private AudioSource audioSource; // Reference to the AudioSource component
-    public AudioClip hitSound; // Sound to play when hitting the enemy
+    private bool isInteracting = false;
+    private string swordName;
+    private bool isSwinging = false; 
+    private AudioSource audioSource;
+    public AudioClip hitSound; 
 
     void Start()
     {
-        // Initialize the AudioSource component
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
         {
@@ -24,7 +23,6 @@ public class SwordAttack : MonoBehaviour
 
     void Update()
     {
-        // Only swing the sword if the inventory is closed and not interacting with tagged objects
         if (Input.GetKeyDown(KeyCode.Space) && equippedSword != null &&
             !inventoryManager.IsInventoryOpen && !isInteracting)
         {
@@ -35,7 +33,7 @@ public class SwordAttack : MonoBehaviour
     public void SetEquippedSword(GameObject sword, string itemName)
     {
         equippedSword = sword;
-        swordName = itemName; // Store the name of the equipped sword
+        swordName = itemName; 
         if (equippedSword != null)
         {
             swordAnimator = equippedSword.GetComponent<Animator>();
@@ -46,7 +44,7 @@ public class SwordAttack : MonoBehaviour
         }
         else
         {
-            swordAnimator = null; // No sword equipped
+            swordAnimator = null; 
         }
     }
 
@@ -54,7 +52,7 @@ public class SwordAttack : MonoBehaviour
     {
         if (swordAnimator != null)
         {
-            isSwinging = true; // Start swinging
+            isSwinging = true; 
             Debug.Log("Triggering swing animation.");
             swordAnimator.SetTrigger(swingTriggerName);
         }
@@ -76,21 +74,18 @@ public class SwordAttack : MonoBehaviour
             EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
             if (enemyHealth != null)
             {
-                                // Play the hit sound
                 if (audioSource != null && hitSound != null)
                 {
                     audioSource.PlayOneShot(hitSound);
                 }
-                int damage = swordName == "Espada azul" ? 50 : 10; // Apply special damage if sword is "Espada azul"
+                int damage = swordName == "Espada azul" ? 50 : 10; 
                 enemyHealth.TakeDamage(damage);
                 Debug.Log($"Hit enemy with {swordName}. Damage dealt: {damage}");
-                // Prevent further damage in the same swing
                 isSwinging = false;
             }
         }
     }
 
-    // Call this method when the swing animation ends to reset the swing state
     public void OnSwingAnimationEnd()
     {
         isSwinging = false;

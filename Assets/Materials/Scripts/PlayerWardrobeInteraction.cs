@@ -2,16 +2,16 @@ using UnityEngine;
 
 public class PlayerWardrobeInteraction : MonoBehaviour
 {
-    public GameObject player; // Reference to the player
-    public GameObject interactPanel; // Reference to the Interact Panel GameObject
-    public InventoryManager inventoryManager; // Reference to the Inventory Manager
+    public GameObject player;
+    public GameObject interactPanel; 
+    public InventoryManager inventoryManager; 
 
     private bool playerInRange;
     private bool isInteracting;
 
     void Start()
     {
-        interactPanel.SetActive(false); // Hide the interact panel initially
+        interactPanel.SetActive(false); 
     }
 
     void Update()
@@ -31,7 +31,7 @@ public class PlayerWardrobeInteraction : MonoBehaviour
         if (other.gameObject == player)
         {
             playerInRange = true;
-            interactPanel.SetActive(true); // Show the interact panel
+            interactPanel.SetActive(true); 
         }
     }
 
@@ -40,7 +40,7 @@ public class PlayerWardrobeInteraction : MonoBehaviour
         if (other.gameObject == player)
         {
             playerInRange = false;
-            interactPanel.SetActive(false); // Hide the interact panel
+            interactPanel.SetActive(false);
             if (isInteracting)
             {
                 EndInteraction();
@@ -51,8 +51,8 @@ public class PlayerWardrobeInteraction : MonoBehaviour
     void StartInteraction()
     {
         isInteracting = true;
-        interactPanel.SetActive(false); // Hide the interact panel
-        inventoryManager.OpenInventory(); // Open the inventory
+        interactPanel.SetActive(false); 
+        inventoryManager.OpenInventory(); 
     }
 
     void EndInteraction()
@@ -60,7 +60,7 @@ public class PlayerWardrobeInteraction : MonoBehaviour
         isInteracting = false;
         if (playerInRange)
         {
-            interactPanel.SetActive(true); // Show the interact panel if player is still in range
+            interactPanel.SetActive(true); 
         }
     }
 }

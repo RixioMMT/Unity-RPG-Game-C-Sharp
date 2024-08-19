@@ -13,7 +13,7 @@ public class InventoryManager : MonoBehaviour
     public Text unequipText;
     public Text cancelText;
 
-    public Item[] items; // Array of items in the inventory
+    public Item[] items;
     public Sprite defaultSprite;
 
     public Transform swordHolder;
@@ -28,7 +28,7 @@ public class InventoryManager : MonoBehaviour
     private const int cancelIndex = -2;
 
     private GameObject equippedItem;
-    private bool justOpenedInventory = false; // Flag to indicate if inventory was just opened
+    private bool justOpenedInventory = false; 
 
     private SwordAttack swordAttack;
 
@@ -40,14 +40,13 @@ public class InventoryManager : MonoBehaviour
 
         if (items.Length != totalSlots)
         {
-            items = new Item[totalSlots]; // Initialize items array to match slots
+            items = new Item[totalSlots];
         }
 
         Debug.Log($"Inventory initialized with {items.Length} slots.");
 
         UpdateInventoryUI();
 
-        // Find the SwordAttack script on the player
         swordAttack = player.GetComponent<SwordAttack>();
         if (swordAttack == null)
         {
@@ -61,7 +60,7 @@ public class InventoryManager : MonoBehaviour
         {
             if (justOpenedInventory)
             {
-                justOpenedInventory = false; // Reset the flag after the first frame
+                justOpenedInventory = false;
             }
             else
             {
@@ -211,16 +210,15 @@ public class InventoryManager : MonoBehaviour
 
                 if (equippedItem != null)
                 {
-                    Destroy(equippedItem); // Remove previous sword
+                    Destroy(equippedItem); 
                 }
 
                 if (itemToEquip.itemPrefab != null)
                 {
                     equippedItem = Instantiate(itemToEquip.itemPrefab, swordHolder.position, swordHolder.rotation, swordHolder);
-                    equippedItem.SetActive(true); // Make sure sword is active
+                    equippedItem.SetActive(true); 
                     Debug.Log("Sword equipped at position: " + swordHolder.position);
 
-                    // Notify SwordAttack about the equipped sword and its name
                     if (swordAttack != null)
                     {
                         swordAttack.SetEquippedSword(equippedItem, itemToEquip.itemName);
@@ -252,10 +250,9 @@ public class InventoryManager : MonoBehaviour
 
         if (equippedItem != null)
         {
-            Destroy(equippedItem); // Remove sword
+            Destroy(equippedItem); 
             equippedItem = null;
 
-            // Notify SwordAttack that the sword is unequipped
             if (swordAttack != null)
             {
                 swordAttack.SetEquippedSword(null, null);
@@ -275,7 +272,7 @@ public class InventoryManager : MonoBehaviour
         UpdateInventoryUI();
         UpdateSelectedItem();
         DisablePlayerMovement();
-        justOpenedInventory = true; // Set the flag when the inventory is opened
+        justOpenedInventory = true;
     }
 
     public void CloseInventory()

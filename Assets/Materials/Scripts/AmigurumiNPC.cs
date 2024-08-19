@@ -9,13 +9,13 @@ public class AmigurumiNPC : MonoBehaviour
     public Text dialogueText;
     public string initialDialogue = "Vence al enemigo y dejaré que me adoptes. Te daré esta espada.";
     public string receivedItemDialogue = "¡Has recibido una espada azul!";
-    public Item blueSword; // Reference to the blue sword item
+    public Item blueSword; 
 
     private bool playerInRange;
     private bool isInteracting;
-    private bool givenItem; // Track if the item has been given
+    private bool givenItem; 
     private InventoryManager inventoryManager;
-    private PlayerMovement playerMovement; // Reference to the player's movement script
+    private PlayerMovement playerMovement; 
 
     private void Start()
     {
@@ -97,7 +97,7 @@ public class AmigurumiNPC : MonoBehaviour
 
         if (playerMovement != null)
         {
-            playerMovement.enabled = false; // Disable player movement
+            playerMovement.enabled = false; 
         }
     }
 
@@ -130,13 +130,13 @@ public class AmigurumiNPC : MonoBehaviour
     private void EndInteraction()
     {
         isInteracting = false;
-        playerInRange = false; // Ensure the player is not considered in range
-        interactPanel.SetActive(false); // Hide the interact panel
-        dialoguePanel.SetActive(false); // Hide the dialogue panel
+        playerInRange = false; 
+        interactPanel.SetActive(false); 
+        dialoguePanel.SetActive(false); 
 
         if (playerMovement != null)
         {
-            playerMovement.enabled = true; // Re-enable player movement
+            playerMovement.enabled = true; 
         }
     }
 }

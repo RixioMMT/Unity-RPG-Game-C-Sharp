@@ -8,18 +8,17 @@ public class ChestInteraction : MonoBehaviour
     public GameObject chestPanel;
     public Text chestText;
     public Item itemInChest;
-    public bool enemyDefeated = false; // Boolean to check if the enemy is defeated
+    public bool enemyDefeated = false; 
 
     private bool playerInRange;
     private bool isInteracting;
-    private InventoryManager inventoryManager; // Reference to the InventoryManager
+    private InventoryManager inventoryManager; 
 
     void Start()
     {
         interactPanel.SetActive(false);
         chestPanel.SetActive(false);
 
-        // Find the InventoryManager using the GameObject tagged "GameManager"
         GameObject inventoryGameObject = GameObject.FindWithTag("GameManager");
         if (inventoryGameObject != null)
         {
@@ -70,7 +69,7 @@ public class ChestInteraction : MonoBehaviour
         {
             playerInRange = false;
             interactPanel.SetActive(false);
-            chestPanel.SetActive(false); // Ensure chestPanel is hidden when exiting range
+            chestPanel.SetActive(false); 
             if (isInteracting)
             {
                 EndInteraction();
@@ -83,17 +82,14 @@ public class ChestInteraction : MonoBehaviour
         isInteracting = true;
         interactPanel.SetActive(false);
 
-        // Check if the item is already in the inventory
         if (inventoryManager != null && inventoryManager.HasItem(itemInChest))
         {
             chestText.text = "Ya tienes una \"" + itemInChest.itemName + "\".";
         }
         else
         {
-            // Show item name in quotes
             chestText.text = "¡Encontraste una \"" + itemInChest.itemName + "\"!";
 
-            // Add item to the inventory
             if (inventoryManager != null)
             {
                 inventoryManager.AddItem(itemInChest);
